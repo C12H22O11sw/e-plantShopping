@@ -34,10 +34,9 @@ const CartItem = ({ onContinueShopping, setAddedToCart }) => {
       dispatch(updateQuantity({ ...item, quantity: item.quantity - 1 }));
     } else {
       dispatch(removeItem(item.name));
-      //setAddedToCart(({ [nameToRemove]: _, ...rest }) => rest);
       setAddedToCart((prevState) => ({
         ...prevState,
-        [product.name]: false,
+        [item.name]: false,
       }));
     }
   };
@@ -45,6 +44,10 @@ const CartItem = ({ onContinueShopping, setAddedToCart }) => {
   const handleRemove = (item) => {
     const nameToRemove = item.name;
     dispatch(removeItem(nameToRemove));
+    setAddedToCart((prevState) => ({
+        ...prevState,
+        [item.name]: false,
+      }));
   };
 
   const calculateTotalCost = (item) => {
